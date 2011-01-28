@@ -3,8 +3,9 @@ Profile management with Git and GitHub
 
 The following is a way to manage profile configuration files using GitHub.
 
-Originally based on Silas Sewell[0] description.
-[0] http://www.silassewell.com/blog/2009/03/08/profile-management-with-git-and-github/
+Originally based on [Silas Sewell][0] description.
+
+[0]: http://www.silassewell.com/blog/2009/03/08/profile-management-with-git-and-github/
 
 Features
 --------
@@ -19,15 +20,19 @@ First time setup
 ----------------
 
 > cd ~
+
 > mkdir .homeconfig.git
 
 > echo "alias homeconfig='git --git-dir=$HOME/.homeconfig.git/ --work-tree=$HOME'" >> .bashrc
+
 > source .bashrc
 
 > homeconfig add .bash_profile .bashrc .bash_aliases
+
 > homeconfig commit -m 'Initial commit'
 
 > homeconfig remote add origin git@github.com:GITHUB_USERNAME/homeconfig.git
+
 > homeconfig push origin master
 
 If you get an error when running config pull to the effect of You asked me to pull without... run the follow:
