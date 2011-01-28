@@ -1,0 +1,38 @@
+#!/usr/bin/env ruby
+
+# Zips all images in directory to one or more zipfiles 
+# (depending on max_size in megabytes)
+#
+# e.g.: $ zip_images MyImages 100
+
+class Zipper
+  def initialize
+    @max_size = ARGV[1].to_i * 1_000_000 # in megabytes
+    @total_size = 0
+    @zipfiles = []
+    @zipname = ARGV[0] + '00'
+  end
+
+  def make_zip
+    return if @zipfiles.empty?
+    puts @total_size
+    @zipname.succ!
+    %x[ zip #{@zipname}.zip #{@zipfiles.join(' ')} ]
+    @zipfiles = []
+    @total_size = 0
+  end
+
+  def zipup
+    Dir['*.jpg'].each do |filename|
+      next unless File.file?(filename)
+      @zipfiles << filename
+      @total_size += File.size(filename)
+      if @total_size > @max_size
+        make_zip
+      end
+    end
+    make_zip
+  end
+end
+
+p Zipper.new.zipup
