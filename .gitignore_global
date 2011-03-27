@@ -26,6 +26,7 @@ CVS
 *.[oa]
 *.so
 *.elc
+*.pyc
 
 *.log
 *.sqlite
